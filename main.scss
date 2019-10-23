@@ -1,0 +1,23 @@
+*, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow: hidden;
+}
+
+#ball-box {
+  position: absolute;
+}
+
+#ball {
+  background-color: black;
+  width: 100%;
+  padding: 50% 0;
+  border-radius: 50%;
+}
+
+#ball:hover {
+  cursor: pointer;
+}
