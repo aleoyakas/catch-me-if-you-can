@@ -1,24 +1,53 @@
-let gameStarted = false;
-let seconds, minutes, hours, t;
+let gameStarted, ballPosition, ballSize, ballSpeed, timeLimit, seconds, lives, level;
+
+const restartGame = () => {
+  ballPosition = 45;
+  ballSize = 10;
+  ballSpeed = 1000;
+  timeLimit = 10;
+  lives = 5;
+  level = 1;
+  gameSetup();
+}
 
 const timer = () => t = setTimeout(increaseTime, 1000);
 
 const increaseTime = () => {
   timer();  
-  seconds++;  
-  stopwatch.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);  
+  seconds--;  
+  stopwatch.textContent = seconds;
+  if (stopwatch.textContent == 00) {
+    clearTimeout(t);
+    lives--;
+    if (lives === 0) {
+      alert(`You didn't catch the ball in time and you're out of lives! You got to level ${level}`);
+      restartGame();
+    }
+    else if (lives === 1) alert("You didn't catch the ball in time! You're on your last life!");
+    else alert(`You didn't catch the ball in time! You have ${lives} lives left!`);
+    
+    gameSetup();
+  }
 }
 
 const gameSetup = () => {
-  $("#instructions").html('Click the ball... if you dare...');
-  document.getElementById("stopwatch").innerHTML = "00:00:00";
-  seconds = 0; minutes = 0; hours = 0;
+  gameStarted = false;
   
-  document.getElementById('ball-box').style.left = "45vw";
-  document.getElementById('ball-box').style.top = "45vh";
-  document.getElementById('ball-box').style.width = "10vw";
-  document.getElementById('ball-box').style.height = "10vh";
+  document.getElementById("instructions").innerHTML = 'Click the ball... if you dare...';
+  document.getElementById("stopwatch").innerHTML = timeLimit;
+  seconds = timeLimit;
+  document.getElementById("lives").innerHTML = lives;
+  document.getElementById("level").innerHTML = level;
+  document.getElementById("ball-size").innerHTML = ballSize;
+  document.getElementById("ball-speed").innerHTML = ballSpeed;
+  
+  document.getElementById('ball-box').style.left = `${ballPosition}vw`;
+  document.getElementById('ball-box').style.top = `${ballPosition}vh`;
+  document.getElementById('ball-box').style.width = `${ballSize}vw`;
+  document.getElementById('ball-box').style.height = `${ballSize}vh`;
 };
+
+const randomRgbValue = () => Math.floor(Math.random()*256);
 
 const moveBall = () => {
   const h = window.innerHeight;
@@ -26,7 +55,7 @@ const moveBall = () => {
   $("#ball-box").animate({
     top: h*Math.random() + "px",
     left: w*Math.random() + "px"
-  }, "slow", () => {
+  }, ballSpeed, () => {
     if (gameStarted) {
       moveBall();
     } else {
@@ -40,7 +69,11 @@ const clickBall = () => {
   if (!gameStarted) {
     clearTimeout(t);
     let timeTaken = document.getElementById("stopwatch").innerHTML;
-    alert(`It took you ${timeTaken} to catch the ball!`);
+    alert(`You caught the ball with ${timeTaken}s left!`);
+    level++
+    ballPosition++
+    ballSize--
+    ballSpeed++
   } else {
     increaseTime();
     moveBall();
@@ -48,4 +81,4 @@ const clickBall = () => {
   }
 }
 
-gameSetup();
+restartGame();
