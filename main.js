@@ -1,8 +1,14 @@
 let gameStarted, ballPosition, ballSize, ballSpeed, timeLimit, seconds, lives, level;
 
 const restartGame = () => {
-  ballPosition = 40;
-  ballSize = 20;
+  if (window.innerWidth <= 700) {
+    ballPosition = 40;
+    ballSize = 20;
+  } else {
+    ballPosition = 45;
+    ballSize = 10;
+  }
+  
   ballSpeed = 1000;
   timeLimit = 30;
   lives = 5;
@@ -71,9 +77,10 @@ const clickBall = () => {
     let timeTaken = document.getElementById("stopwatch").innerHTML;
     alert(`You caught the ball with ${timeTaken}s left!`);
     level++
-    ballPosition++
-    ballSize--
-    ballSpeed++
+    if (level % 2 === 1) {
+      ballPosition++;
+      ballSize--;
+    } else ballSpeed = ballSpeed + 5;
   } else {
     increaseTime();
     moveBall();
