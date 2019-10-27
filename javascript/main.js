@@ -2,7 +2,7 @@ let gameStarted, ballPosition, ballSize, ballSpeed, timeLimit, seconds, lives, l
 
 const restartGame = () => {
   ballPosition = 45;
-  ballSize = 10;
+  ballSize = 20;
   ballSpeed = 1000;
   timeLimit = 10;
   lives = 5;
