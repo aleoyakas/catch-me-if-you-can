@@ -1,4 +1,5 @@
-*, body {
+*,
+body {
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
@@ -6,6 +7,15 @@
 
 body {
   overflow: hidden;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35), white, white, white), url("./background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+}
+
+p {
+  font-size: 1.5em;
 }
 
 #ball-box {
@@ -15,12 +25,20 @@ body {
 #ball {
   background-color: black;
   width: 100%;
-  padding: 50% 0;
+  height: 100%;
   border-radius: 50%;
 }
 
 #ball:hover {
   cursor: pointer;
 }
+
+#ball-animation {
+  background-color: red;
+  width: 10px;
+  height: 10px;
+}
+
+/*# sourceMappingURL=main.css.map */
 
 /*# sourceMappingURL=main.css.map */
