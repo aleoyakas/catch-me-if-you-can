@@ -1,30 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Catch Me If You Can!</title>
-  <link rel="stylesheet" href="main.css">
-</head>
-<body>
-  <header>
-    <h1>Catch Me If You Can!</h1>
-    <p id="instructions"></p>
-    <p>Lives remaining: <span id="lives"></span></p>
-    <p>Level: <span id="level"></span></p>
-    <p>Ball size: <span id="ball-size"></span></p>
-    <p>Ball speed: <span id="ball-speed"></span></p>
-    <p>Time left: <time id="stopwatch"></time>s</p>
-    <p>Total Time: <time id="total-time"></time>s</p>
-  </header>
-  <div id="ball-box">
-    <div id="ball" onclick="clickBall();"></div>
-  </div>
-  <script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
-  <script src="./javascript/main.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Catch Me If You Can!</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Catch Me If You Can!</h1>
+      <p id="instructions"></p>
+      <p>Lives remaining: <span id="lives"></span></p>
+      <p>Level: <span id="level"></span></p>
+      <p>Ball size: <span id="ball-size"></span></p>
+      <p>Ball speed: <span id="ball-speed"></span></p>
+      <p>Time left: <time id="stopwatch"></time>s</p>
+      <p>Total Time: <time id="total-time"></time>s</p>
+    </header>
+    <div id="ball-box">
+      <div id="ball" onclick="clickBall();"></div>
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="./javascript/main.js"></script>
+  </body>
 </html>

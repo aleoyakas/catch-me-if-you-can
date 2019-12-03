@@ -1,5 +1,14 @@
 /* Variables which will be defined set and changed later */
-let gameStarted, ballPosition, ballSize, ballSpeed, timeLimit, totalTime, seconds, lives, level;
+let gameStarted,
+  ballCount,
+  ballPosition,
+  ballSize,
+  ballSpeed,
+  timeLimit,
+  totalTime,
+  seconds,
+  lives,
+  level;
 
 /* Constants that will be set on screen load */
 const h = window.innerHeight;
@@ -9,13 +18,13 @@ const w = window.innerWidth;
 let htmlInstructions = document.getElementById("instructions");
 let htmlStopwatch = document.getElementById("stopwatch");
 let htmlTotalTime = document.getElementById("total-time");
-let htmlBallBox = document.getElementById('ball-box');
+let htmlBallBox = document.getElementById("ball-box");
 let htmlBallSpeed = document.getElementById("ball-speed");
 let htmlBallSize = document.getElementById("ball-size");
 let htmlLives = document.getElementById("lives");
 let htmlLevel = document.getElementById("level");
 
-const timer = () => t = setTimeout(decreaseTime, 1000);
+const timer = () => (t = setTimeout(decreaseTime, 1000));
 
 const decreaseTime = () => {
   timer();
@@ -30,27 +39,34 @@ const decreaseTime = () => {
     clearTimeout(t);
     lives--;
     if (lives === 0) {
-      alert(`You didn't catch the ball in time and you're out of lives! You got to level ${level} in ${totalTime} seconds!`);
+      alert(
+        `You didn't catch the ball in time and you're out of lives! You got to level ${level} in ${totalTime} seconds!`
+      );
       restartGame();
-    }
-    else if (lives === 1) alert("You didn't catch the ball in time! You're on your last life!");
-    else alert(`You didn't catch the ball in time! You have ${lives} lives left!`);
-    
+    } else if (lives === 1)
+      alert("You didn't catch the ball in time! You're on your last life!");
+    else
+      alert(`You didn't catch the ball in time! You have ${lives} lives left!`);
+
     levelSetup();
   }
-}
+};
 
 const moveBall = () => {
-  $("#ball-box").animate({
-    top: h*Math.random() + "px",
-    left: w*Math.random() + "px"
-  }, ballSpeed, () => {
-    if (gameStarted) {
-      moveBall();
-    } else {
-      levelSetup();
+  $("#ball-box").animate(
+    {
+      top: h * Math.random() + "px",
+      left: w * Math.random() + "px"
+    },
+    ballSpeed,
+    () => {
+      if (gameStarted) {
+        moveBall();
+      } else {
+        levelSetup();
+      }
     }
-  });
+  );
 };
 
 const clickBall = () => {
@@ -58,7 +74,7 @@ const clickBall = () => {
   if (!gameStarted) {
     clearTimeout(t);
     alert(`You caught the ball with ${seconds}s left!`);
-    level++
+    level++;
     if (level % 2 === 1) {
       ballPosition++;
       ballSize--;
@@ -66,26 +82,31 @@ const clickBall = () => {
   } else {
     decreaseTime();
     moveBall();
-    htmlInstructions.innerHTML = 'Click the ball as quickly as you can!';
+    htmlInstructions.innerHTML = "Click the ball as quickly as you can!";
   }
-}
+};
 
 const levelSetup = () => {
   gameStarted = false;
   seconds = timeLimit;
-  
-  htmlInstructions.innerHTML = 'Click the ball... if you dare...';
+
+  htmlInstructions.innerHTML = "Click the ball... if you dare...";
   htmlStopwatch.innerHTML = timeLimit;
   htmlTotalTime.innerHTML = totalTime;
   htmlLives.innerHTML = lives;
   htmlLevel.innerHTML = level;
   htmlBallSize.innerHTML = ballSize;
-  htmlBallSpeed.innerHTML = ballSpeed;
-  
-  htmlBallBox.setAttribute("style",`left: ${ballPosition}vw; top: ${ballPosition}vh; width: ${ballSize}vw; height: ${ballSize};`)
+  htmlBallSpeed.innerHTML = (ballSpeed - 995) / 5;
+
+  htmlBallBox.setAttribute(
+    "style",
+    `left: ${ballPosition}vw; top: ${ballPosition}vh; width: ${ballSize}vw; height: ${ballSize}vw;`
+  );
 };
 
 const restartGame = () => {
+  ballCount = 1;
+
   if (window.innerWidth <= 700) {
     ballPosition = 40;
     ballSize = 20;
@@ -93,13 +114,13 @@ const restartGame = () => {
     ballPosition = 45;
     ballSize = 10;
   }
-  
+
   ballSpeed = 1000;
   totalTime = 0;
   timeLimit = 30;
   lives = 5;
   level = 1;
   levelSetup();
-}
+};
 
 restartGame();
